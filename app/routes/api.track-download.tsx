@@ -45,7 +45,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     });
 
   } catch (error) {
-    console.error("Erreur tracking globale:", error);
+    console.error("Erreur tracking globale:", JSON.stringify(error, null, 2))
+    console.error("Message:", (error as Error).message)
     return new Response(JSON.stringify({ error: "Erreur serveur" }), {
       status: 500,
       headers: { "Content-Type": "application/json" }
