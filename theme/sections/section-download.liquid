@@ -1,0 +1,107 @@
+{{ 'section-download.css' | asset_url | stylesheet_tag }}
+
+{% if customer %}
+  <section class="downloads-section page-width">
+    {% if section.settings.title != blank %}
+      <h2 class="downloads-section__title h1">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    <download-tracker>
+      <div class="downloads-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'document' %}
+            {%- assign doc_title = block.settings.title -%}
+            {%- assign doc_url = block.settings.url -%}
+            {%- assign doc_image = block.settings.image -%}
+
+            <div class="document-card" {{ block.shopify_attributes }}>
+              <div class="document-card__image-wrapper">
+                {% if doc_image != blank %}
+                  {{
+                    doc_image
+                    | image_url: width: 400
+                    | image_tag:
+                      loading: 'lazy',
+                      alt: doc_title,
+                      width: 400,
+                      height: 300,
+                      class: 'document-card__image'
+                  }}
+                {% else %}
+                  <div class="document-card__image-placeholder">
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="document-card__content">
+                <h3 class="document-card__title h4">{{ doc_title }}</h3>
+                <button
+                  class="button button--primary document-card__download"
+                  data-document-url="{{ doc_url }}"
+                  data-document-title="{{ doc_title | escape }}"
+                  data-customer-id="gid://shopify/Customer/{{ customer.id }}"
+                  data-customer-name="{{ customer.first_name }} {{ customer.last_name }}"
+                  type="button"
+                >
+                  Télécharger
+                </button>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </download-tracker>
+  </section>
+
+{% else %}
+  <div class="downloads-login-prompt page-width">
+    <div class="downloads-login-prompt__content">
+      <h1 class="h2">Accès impossible</h1>
+      <p>Vous n'êtes pas connecté, veuillez vous authentifier pour accéder à cette page afin que vous puissiez consulter nos documents.</p>
+      <a href="{{ routes.account_login_url }}?return_url={{ request.path | url_encode }}"
+      class="button button--primary">
+          Me connecter
+        </a>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Téléchargements",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre",
+      "default": "Nos documents"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "document",
+      "name": "Document",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Mon document"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL du PDF"
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Téléchargements" }]
+}
+{% endschema %}

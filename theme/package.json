@@ -1,0 +1,35 @@
+{
+  "name": "dnd-technical-test-theme",
+  "version": "1.0.0-alpha.1",
+  "private": true,
+  "type": "module",
+  "description": "Theme local pour dnd-technical-test",
+  "author": "Karim",
+  "license": "UNLICENSED",
+  "keywords": [
+    "shopify",
+    "theme"
+  ],
+  "scripts": {
+    "dev": "shopify theme dev --store=dnd-technical-test-2.myshopify.com --path . --live-reload full-page",
+    "dev:shopify": "shopify theme dev --store=dnd-technical-test-2.myshopify.com --path . --live-reload full-page",
+    "dev:ts": "tsc -p tsconfig.theme.json --watch",
+    "pull:dev": "shopify theme pull --development --store=dnd-technical-test-2.myshopify.com --path .",
+    "deploy": "shopify theme push --store=dnd-technical-test-2.myshopify.com --path .",
+    "open:editor": "shopify theme open --development --editor --store=dnd-technical-test-2.myshopify.com",
+    "build:ts": "tsc -p tsconfig.theme.json"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@remix-run/node": "^2.17.4",
+    "@remix-run/react": "^2.17.4",
+    "@remix-run/serve": "^2.17.4",
+    "@shopify/polaris": "^13.9.5",
+    "isbot": "^4.4.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
