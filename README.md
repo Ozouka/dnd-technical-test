@@ -2,6 +2,13 @@
 
 Application Shopify custom de tracking de téléchargements de documents PDF, réalisée dans le cadre du test technique Développeur Full-Stack Shopify pour l'agence Dn'D.
 
+
+---
+ 
+## 🎬 Démo
+ 
+ https://www.loom.com/share/3a6d48b528bb494084ab95c0f4d81d76
+
 ---
 
 ## 🏗️ Architecture
@@ -128,6 +135,14 @@ Le front Shopify appelle : `POST /apps/downloads-tracker/api/track-download`
 Le thème est disponible dans un autre repo séparé qui est le suivant : **[dnd-test-shopify-frontend](https://github.com/Ozouka/dnd-test-shopify-frontend)**
 
 Cela permet directement d'aller dans la Boutique en Ligne sur Shopify et de synchro le theme directement avec GitHub (très utile pour le versionning et aussi pour les éventuelles QA à faire car on peut avoir des themes en fonction des branch !)
+
+---
+
+## 🚀 Déploiement
+
+Un déploiement sur Railway a été configuré avec un Dockerfile dédié (Node 22, pnpm, migrations Prisma au démarrage). Des instabilités liées à la gestion des ports sur le plan gratuit ont empêché le démarrage stable du serveur en production.
+
+L'application est entièrement fonctionnelle en local via `pnpm dev`. La base de données Supabase est hébergée et persistante.
 
 ---
 
