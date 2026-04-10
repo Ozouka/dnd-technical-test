@@ -95,7 +95,8 @@ Créez un fichier `.env` à la racine :
 
 ```bash
 SUPABASE_URL=https://xxxx.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=eyJ...
+SUPABASE_ANON_KEY=sb_publishable_xxxx
+SUPABASE_SERVICE_ROLE_KEY=sb_secret_xxxx
 ```
 
 ### 4. Lance l'application
