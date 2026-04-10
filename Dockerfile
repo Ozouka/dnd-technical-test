@@ -21,4 +21,4 @@ RUN npx react-router build
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "echo 'Starting...' && npx prisma migrate deploy && echo 'Migrations done, starting server...' && npx react-router-serve ./build/server/index.js"]
+CMD ["sh", "-c", "echo 'Step 1: migrations...' && npx prisma migrate deploy && echo 'Step 2: starting server...' && npx react-router-serve ./build/server/index.js"]
