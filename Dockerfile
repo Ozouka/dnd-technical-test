@@ -3,8 +3,6 @@ RUN apk add --no-cache openssl
 
 WORKDIR /app
 
-ENV NODE_ENV=production
-
 RUN npm install -g pnpm
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
@@ -14,8 +12,13 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-RUN pnpm run build
+RUN npx prisma generate
+
+ARG SHOPIFY_API_KEY
+ENV SHOPIFY_API_KEY=$SHOPIFY_API_KEY
+
+RUN npx react-router build
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "npx prisma migrate deploy && npx react-router-serve ./build/server/index.js"]
+CMD ["sh", "-c", "echo 'Starting...' && npx prisma migrate deploy && echo 'Migrations done, starting server...' && npx react-router-serve ./build/server/index.js"]
