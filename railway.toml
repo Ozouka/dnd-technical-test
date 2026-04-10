@@ -1,0 +1,4 @@
+[deploy]
+startCommand = "sh -c 'echo PORT:$PORT && npx prisma migrate deploy && npx react-router-serve ./build/server/index.js'"
+healthcheckPath = "/"
+healthcheckTimeout = 300
